@@ -1,6 +1,6 @@
 # yourNote
 
-<ul><em>Enhancements</em>
+<ul><b><em>Enhancements</em></b><br>
 <b>Phase 1:</b>
 <li />Accessibility: Add hyperlink to header
 <li />Visual Enhancement: Add hover functionality on notes
