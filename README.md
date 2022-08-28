@@ -1,7 +1,7 @@
 # yourNote
 
-<ul><b><em>Enhancements</em></b><br><br><br>
-<b>Phase 1:</b>
+<ul><b><em>Enhancements</em></b><br><br>
+<b>Phase 1:</b><br>
 <li />Accessibility: Add hyperlink to header
 <li />Visual Enhancement: Add hover functionality on notes
 <li />Visual Enhancement: Change Deleted Notes/Saved Notes icon dynamically OR Sidebar
