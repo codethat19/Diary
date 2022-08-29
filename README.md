@@ -8,7 +8,7 @@
 
 <b>Phase 2:</b>
 <li />Function: Update Note
-<li />Function: Notes Archival
+<li />Function: Archive Note
 <li />Visual Enhancement: Design(Responsive/CSS changes)
 
 <b>Phase 3:</b>
