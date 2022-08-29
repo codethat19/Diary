@@ -1,21 +1,27 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import Footer from "./Footer";
-import Note from "./Note";
+// import NoteRender from "./NoteRender";
 import CreateArea from "./CreateArea";
+// import Navbar from "./navbar";
 import axios from "axios";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import DeletedNotes from "./DeletedNotes";
+import Notes from "./Notes";
+import ArchivedNotes from "./ArchivedNotes";
 
 function App() {
   const [notes, setNotes] = useState([]);
 
+
   const viewNotes = async () => {
     // const flag = JSON.stringify( setFlag );
-    //console.log(flag);
-    const res = await axios.get('/view')
+    //console.log();
+    //setNoteFlag();
+    await axios.get('/view')
     .then(res => {
       setNotes(res.data);
-      //console.log(res.data)
-      console.log(notes)
+      //console.log(res.data);
     })
     .catch( error => {
       console.log(error);
@@ -25,71 +31,66 @@ function App() {
   useEffect( () => {  
     viewNotes();
   },[]);
-  // useEffect( () => {
-  //   viewNotes();
-  // },[]);
-  //viewNotes();
-  const viewDeletedNotes = async (note) => {
-    // const res = await axios.get('/deletedNotes')
-    // .then(res => {
-    //   const deletedNotes = res.data;
-    //   setNotes(deletedNotes);
-    //   console.log(notes);
-    // })
-    // .catch( error => {
-    //   console.log(error);
-    // });
-    const res = await axios.get('/view')
-      .then(res => {
-        console.log(res.data)
-        setNotes(res.data);
-      })
-      .catch( error => {
-        console.log(error);
-      });
-  }
+  // const viewDeletedNotes = async (note) => {
+  //   await axios.get('/deletedNotes')
+  //     .then(res => {
+  //       // console.log(res.data)
+  //       setNotes(res.data);
+  //     })
+  //     .catch( error => {
+  //       console.log(error);
+  //     });
+  // }
   const addNote = async (note) => {
       const newNote = JSON.stringify( note );
 
-      const res = await axios.post('/addNote', newNote)
+      await axios.post('/addNote', newNote)
       .then(response => {
         viewNotes();
-        console.log("Addition Successful")
-        console.log(newNote)
+        // console.log("Addition Successful")
+        // console.log(newNote)
       })
       .catch( error => {
         console.log(error);
       });
   };
-  const deleteNote = async (id) => {
-    let res = await axios.post('/deleteNote', id)
-    .then(response => {
-      viewNotes();
-      console.log("Deletion Successful");
-    })
-    .catch( error => {
-      console.log(error);
-    });
-  };
+  
+
+
   return (
-    <div>
-      <Header deletedNotes={viewNotes}/>
-      <CreateArea onAdd={addNote} />
-      {notes.map((noteItem, index) => {
-        return (
-          <Note
-            key={index}
-            id={noteItem._id}
-            title={noteItem.title}
-            content={noteItem.content}
-            onDelete={deleteNote}
-            flag={noteItem.flag}
-          />
-        );
-      })}
-      <Footer />
-    </div>
-  );
+    
+    <>
+    <Router>
+    <Routes>
+      <Route path='/view' element={
+        <>
+          <Header />
+          <CreateArea onAdd={addNote} />
+          <Notes notes={notes} setNotes={setNotes} />
+          <Footer />
+        </>
+      }/>
+
+      <Route path='/deleted' element={
+        <>
+          <Header />
+          <DeletedNotes notes={notes} setNotes={setNotes} />
+          <Footer />         
+        </>
+      }/>
+      <Route path='/archived' element={
+        <>
+          <Header />
+          <ArchivedNotes notes={notes} setNotes={setNotes} />
+          <Footer />
+        </>
+      }/>
+      </Routes>
+      </Router>
+      {/* <Footer /> */}
+    </>
+  
+    );
 }
 
 export default App;

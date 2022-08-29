@@ -1,28 +1,42 @@
-import React from "react";
-import DeleteIcon from "@material-ui/icons/Delete";
-import RestoreFromTrashIcon from '@mui/icons-material/RestoreFromTrash';
+import React, { useEffect } from "react";
+import axios from "axios";
+import NoteRender from "./NoteRender";
 
-function DeletedNote(props) {
-  function handleClick() {
-    props.onDelete(props.id);
-  }
-  if (!props.flag) {
-    return (
-      <div className="note">
-        <div><h1>{props.title}</h1>
-        <p>{props.content}</p>
-        <button onClick={handleClick}>
-          <RestoreFromTrashIcon />
-        </button>
-        </div>
-      </div>
-    );
-  } else {
-    return(
-      <></>
-    );
+function DeletedNotes (props) {
+  async function viewDeletedNotes () {
+    await axios.get('/deletedNotes')
+      .then(res => {
+        console.log(res.data);
+        props.setNotes(res.data);
+      })
+      .catch( error => {
+        console.log(error);
+      });
   }
   
+  //viewDeletedNotes();
+  useEffect( () => {   
+    viewDeletedNotes();
+},[]);
+
+  return (
+    <>
+      {props.notes.map((noteItem, index) => {        
+          return (
+            <NoteRender
+              key={index}
+              id={noteItem._id}
+              title={noteItem.title}
+              content={noteItem.content}
+              // onDelete={viewDeletedNotes}
+              onPermaDelete={viewDeletedNotes}
+              onRecovery={viewDeletedNotes}
+              flag={noteItem.flag}
+            />
+          );
+        })}
+    </>
+  );
 }
 
-export default DeletedNote;
+export default DeletedNotes;
