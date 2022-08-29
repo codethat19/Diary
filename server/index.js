@@ -69,8 +69,8 @@ app.get('/', (req, res) => {
 app.get('/view', (req, res) => {
     // let note = (Object.keys(req.body));
     // const lengthNote = note.length;
-    // // console.log(lengthNote);
-    // // console.log(note);
+    // // // console.log(lengthNote);
+    // // // console.log(note);
     // let flg;
     // if (lengthNote) {
     //     flg = 1
@@ -89,16 +89,26 @@ app.get('/view', (req, res) => {
     // } else {
     //     flg=0
     // }
-    // console.log(flg);
+    //console.log(flg);
+    console.log("Reached viewNotes");
     const notes  = Note.find({flag: 1}, (err, foundNotes) => {  
-        console.log(foundNotes);  
+        //console.log(foundNotes);  
         res.send(foundNotes);
     });    
 })
 app.get('/deletedNotes', (req, res) => {
-    const notes  = Note.find({flag: 0}, (err, foundNotes) => {  
-        res.send(foundNotes);
+    console.log("Reached deletedNotes");
+    const deletedNote  = Note.find({flag: 0}, (err, foundDeletedNotes) => {  
+        res.send(foundDeletedNotes);
+    });
+    // res.redirect('/view');    
+})
+app.get('/archived', (req, res) => {
+    console.log("Reached archivedNotes");
+    const archivedNote  = Note.find({flag: 2}, (err, foundArchivedNotes) => {  
+        res.send(foundArchivedNotes);
     });    
+    // res.redirect('/view');
 })
 app.post('/addNote', (req, res) => {
     //const bdy = JSON.parse(req.body);
@@ -120,18 +130,70 @@ app.post("/deleteNote", (req, res) => {
     // const note = JSON.parse((Object.keys(req.body)));
     // const id = note._id;
     const id = (Object.keys(req.body));
-    console.log(id);
+    //console.log(id);
     Note.findByIdAndUpdate(id, {flag: 0}, (err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            // console.log("Successfully Deleted");
+        }
+    })
+    // mongoose.connection.close();
+    res.redirect('/view');
+});
+app.post("/archive", (req, res) => {
+    // const note = JSON.parse((Object.keys(req.body)));
+    // const id = note._id;
+    const id = (Object.keys(req.body));
+    //console.log(id);
+    Note.findByIdAndUpdate(id, {flag: 2}, (err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            // console.log("Successfully Deleted");
+        }
+    })
+    // mongoose.connection.close();
+    res.redirect('/view');
+});
+app.post("/unarchive", (req, res) => {
+    // const note = JSON.parse((Object.keys(req.body)));
+    // const id = note._id;
+    const id = (Object.keys(req.body));
+    //console.log(id);
+    Note.findByIdAndUpdate(id, {flag: 1}, (err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            // console.log("Successfully Deleted");
+        }
+    })
+    // mongoose.connection.close();
+    res.redirect('/view');
+});
+app.post("/permaDeleteNote", (req, res) => {
+    const id = (Object.keys(req.body));
+    Note.findByIdAndDelete(id, (err) => {
         if (err) {
             console.log(err);
         } else {
             console.log("Successfully Deleted");
         }
     })
-    // mongoose.connection.close();
     res.redirect('/view');
 });
-
+// app.post("/recover", (req, res) => {
+//     const id = (Object.keys(req.body));
+//     Note.findByIdAndUpdate(id, {flag: 1}, (err) => {
+//         if (err) {
+//             console.log(err);
+//         } else {
+//             // console.log("Successfully Deleted");
+//         }
+//     })
+//     // mongoose.connection.close();
+//     res.redirect('/view');
+// });
 
 app.listen(process.env.PORT || port, () => {
     console.log("Server running at port: " + port);
