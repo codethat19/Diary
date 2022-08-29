@@ -8,10 +8,12 @@
 
 <b>Phase 2:</b>
 <li />Function: Update Note
+<li />Function: Notes Archival
 <li />Visual Enhancement: Design(Responsive/CSS changes)
 
 <b>Phase 3:</b>
 <li />Function: Login
 <li />Function: Notes Encryption
+<li />Function: Auto DB deletion of Deleted notes > 30 days
 <li />Function: MongoDB Atlas migration
 </ul>
