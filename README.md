@@ -2,7 +2,7 @@
 
 <ul><b><em>Enhancements</em></b><br><br>
 <b>Phase 1:</b><br><br>
-<li />~~Accessibility: Add hyperlink to header~~(Completed)
+<li style="text-decoration: line-through;"/>~~Accessibility: Add hyperlink to header(Completed)
 <li />Visual Enhancement: Add hover functionality on notes(Completed)
 <li />Visual Enhancement: Change Deleted Notes/Saved Notes icon dynamically OR Sidebar(Completed)
 
