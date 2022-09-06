@@ -3,7 +3,6 @@ import Header from "./Header";
 import Footer from "./Footer";
 // import NoteRender from "./NoteRender";
 import CreateArea from "./CreateArea";
-// import Navbar from "./navbar";
 import axios from "axios";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import DeletedNotes from "./DeletedNotes";
@@ -67,7 +66,7 @@ function App() {
           <Header />
           <CreateArea onAdd={addNote} />
           <Notes notes={notes} setNotes={setNotes} />
-          <Footer />
+          {/* <Footer /> */}
         </>
       }/>
 
@@ -75,14 +74,14 @@ function App() {
         <>
           <Header />
           <DeletedNotes notes={notes} setNotes={setNotes} />
-          <Footer />         
+          {/* <Footer />          */}
         </>
       }/>
       <Route path='/archived' element={
         <>
           <Header />
           <ArchivedNotes notes={notes} setNotes={setNotes} />
-          <Footer />
+          {/* <Footer /> */}
         </>
       }/>
       </Routes>

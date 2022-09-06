@@ -21,7 +21,7 @@ function Notes (props) {
         <>
           {props.notes.map((noteItem, index) => {        
               return (
-                <NoteRender
+                <NoteRender className="container-fluid"
                   key={index}
                   id={noteItem._id}
                   title={noteItem.title}

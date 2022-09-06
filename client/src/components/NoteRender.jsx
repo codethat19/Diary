@@ -7,7 +7,7 @@ import UnarchiveIcon from '@material-ui/icons/Unarchive';
 import axios from "axios";
 
 function NoteRender(props) {
-  const [style, setStyle] = useState({display: 'none'});
+  const [style, setStyle] = useState({visibility: 'hidden'});
 
     async function deleteNote(id) {
       id=props.id;
@@ -75,29 +75,30 @@ function NoteRender(props) {
 
   if (props.flag === 1) {
     element = <>
-      <button style={style} onClick={deleteNote}><DeleteIcon /></button>
+      <button  style={style} className="noteButton" onClick={deleteNote}><DeleteIcon /></button>
       {/* <button style={style} onClick={handleEdit}><EditIcon /></button> */}
-      <button style={style} onClick={handleArchive}><ArchiveIcon /></button>
+      <button  style={style} className="noteButton" onClick={handleArchive}><ArchiveIcon /></button>
       </>
   } else if (props.flag === 0) {
       element = <>       
-        <button style={style} onClick={permaDelete}><DeleteIcon /></button>
-        <button style={style} onClick={handleRecover}><RestoreIcon /></button>
+        <button  style={style} className="noteButton" onClick={permaDelete}><DeleteIcon /></button>
+        <button  style={style} className="noteButton" onClick={handleRecover}><RestoreIcon /></button>
       </>
   } else if (props.flag === 2){
     element = <>
-      <button style={style} onClick={handleUnArchive}><UnarchiveIcon /></button>
-      <button style={style} onClick={deleteNote}><DeleteIcon /></button>
+      <button  style={style} className="noteButton" onClick={handleUnArchive}><UnarchiveIcon /></button>
+      <button  style={style} className="noteButton" onClick={deleteNote}><DeleteIcon /></button>
       </>
   }
 
   return(
-        <div className="note" onMouseEnter={e => {
-          setStyle({display: 'inline'});
+        <div className="note"   onMouseEnter={e => {
+          setStyle({visibility: 'visible'}); 
       }}
       onMouseLeave={e => {
-          setStyle({display: 'none'})
-      }}>
+          setStyle({visibility: 'hidden'})
+      }}
+      >
           <div><h1>{props.title}</h1>
           <p>{props.content}</p>
           {element}

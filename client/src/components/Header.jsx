@@ -38,8 +38,8 @@ function Header() {
     <div className="header">
       <h1>
 
-        <FaIcons.FaBars onClick={showSidebar} style={{cursor:'pointer'}}/>  &nbsp;&nbsp;&nbsp;&nbsp;    
-        <DescriptionIcon /> <Link to='/view'>Diary</Link>
+        <FaIcons.FaBars onClick={showSidebar} style={{cursor:'pointer'}}/>  &nbsp;&nbsp;   
+        {/* <DescriptionIcon style={{transform: "scale(1.5)"}}/>*/} <Link to='/view'>Diary</Link> 
         {/* <Link to='/deleted'><RestoreFromTrashIcon onClick={handleClick}/></Link> */}
       
       </h1>      
